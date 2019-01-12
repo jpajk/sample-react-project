@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import withAuth from "../hoc/withAuth";
+import withAuth from "../shared/withAuth";
 
 class Home extends Component {
   render() {
@@ -45,4 +45,4 @@ class Home extends Component {
   }
 }
 
-export default withAuth(Home) ;
+export default withAuth(Home)

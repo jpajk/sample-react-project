@@ -1,7 +1,11 @@
+import { LOGIN, LOGOUT } from "../actions";
+
 const users = (state = {}, action) => {
   switch (action.type) {
-    case 'LOGIN':
-      return {...state, user: 'myUser'};
+    case LOGIN:
+      return {...state, user: action.user};
+    case LOGOUT:
+      return {...state, user: action.user};
     default:
       return state
   }

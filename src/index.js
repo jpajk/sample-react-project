@@ -2,20 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from './reducers'
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-
+import store from './defaultStore'
 import './index.css';
-
-const initialState = {
-  users: {
-    user: 'whatever'
-  }
-};
-
-const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

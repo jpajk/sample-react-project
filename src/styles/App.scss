@@ -1,2 +1,12 @@
 
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+body {
+  padding-top: 56px + 15px !important;
+}
+
+.messages-top {
+  position: absolute;
+  top: 56px + 15px;
+  width: 100%
+}
