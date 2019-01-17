@@ -27,7 +27,7 @@ class Messages extends Component {
                   <Alert variant="danger">
                     {flashMessage.message}
                   </Alert>
-                </AnimatedBox>
+                </AnimatedBox>;
               default:
                 return null
             }
