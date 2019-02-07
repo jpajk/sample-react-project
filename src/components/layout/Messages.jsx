@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Row, Col, Alert} from 'react-bootstrap'
+import { Row, Col, Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { SUCCESS, ERROR } from "../../actions";
+import { SUCCESS, ERROR, apiLoginUser, clearMessage } from "../../actions";
 import posed, { PoseGroup } from "react-pose";
 
 const AnimatedBox = posed.div({
@@ -10,6 +10,12 @@ const AnimatedBox = posed.div({
 })
 
 class Messages extends Component {
+  constructor() {
+    super()
+
+    this.clearMessages = this.clearMessages.bind(this)
+  }
+
   render() {
     return <Row className="messages-top">
       <Col xs={{span: 4, offset:4}}>
@@ -25,7 +31,14 @@ class Messages extends Component {
               case ERROR:
                 return <AnimatedBox key={i}>
                   <Alert variant="danger">
-                    {flashMessage.message}
+                    <Row>
+                      <Col xs={{span: 6 }}>
+                        {flashMessage.message}
+                      </Col>
+                      <Col xs={{span: 6 }} className="text-right">
+                        <i style={{cursor: 'pointer'}} className="fa fa-fw fa-times" onClick={this.clearMessages} />
+                      </Col>
+                    </Row>
                   </Alert>
                 </AnimatedBox>;
               default:
@@ -36,6 +49,10 @@ class Messages extends Component {
       </Col>
     </Row>;
   }
+
+  clearMessages() {
+    this.props.clearMessage()
+  }
 }
 
 const mapStateToProps = state => {
@@ -44,4 +61,12 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Messages);
+const mapDispatchToProps = dispatch => {
+  return {
+    clearMessage: () => {
+      dispatch(apiLoginUser());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);

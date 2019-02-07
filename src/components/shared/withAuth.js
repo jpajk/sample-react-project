@@ -15,7 +15,7 @@ const withAuth = WrappedComponent => {
 
   return connect(null, mapDispatchToProps)(class extends Component {
       componentWillMount() {
-        Api.get().then((res) => {
+        Api.get('users/current-user').then((res) => {
           if (!res.user) {
             this.props.flashError('Please log in')
             this.props.history.push('login')

@@ -1,4 +1,7 @@
 
+import Api from '../lib/api/Api'
+import history from '../history'
+
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
@@ -6,9 +9,9 @@ export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
-export const loginUser = function () {
+export const loginUser = function (token, user) {
   return {
-    type: LOGIN
+    type: LOGIN, token, user
   }
 };
 
@@ -32,9 +35,17 @@ export const messageError = function (message) {
   }
 };
 
-export const apiLoginUser = function () {
+export const apiLoginUser = function (login, password) {
   return dispatch => {
-    window.console.log('login user async')
+    Api.post('users/login', {
+      email: login,
+      password: password
+    }).then((res) => {
+      if (res.data.token && res.user) {
+        dispatch(loginUser(res.data.token, res.user))
+        history.push('/')
+      }
+    })
   }
 };
 
