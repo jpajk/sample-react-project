@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import { apiLoginUser } from "../../actions";
+import { attemptLoginUser} from "../../actions";
 import { connect } from 'react-redux'
 
 class Login extends Component {
@@ -71,7 +71,7 @@ class Login extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     apiLoginUser: (login, password) => {
-      dispatch(apiLoginUser(login, password));
+      dispatch(attemptLoginUser(login, password));
     }
   };
 };

@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
+
+import rootSaga from './sagas'
 import store from './defaultStore'
 import './index.css';
+
+store.runSaga(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

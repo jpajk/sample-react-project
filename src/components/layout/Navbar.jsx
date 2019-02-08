@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import { apiLoginUser } from './../../actions/'
 import { connect } from 'react-redux';
 
 
 class Navbar extends Component {
-  constructor() {
-    super()
-
-    Navbar.testLoginUser = Navbar.testLoginUser.bind(this)
-  }
-
   render() {
     return <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark mb-4">
       <a className="navbar-brand" href="/">Offcanvas navbar</a>
@@ -48,16 +41,12 @@ class Navbar extends Component {
             <FontAwesome name="user"/>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1" onClick={Navbar.testLoginUser}>Login</Dropdown.Item>
+            <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
             <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>;
       </div>
     </nav>;
-  }
-
-  static testLoginUser() {
-    this.props.onLoginUser()
   }
 }
 
@@ -67,12 +56,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLoginUser: () => {
-      dispatch(apiLoginUser());
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps)(Navbar);

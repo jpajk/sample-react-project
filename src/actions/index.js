@@ -2,38 +2,33 @@
 import Api from '../lib/api/Api'
 import history from '../history'
 
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
-
-export const SUCCESS = 'SUCCESS';
-export const ERROR = 'ERROR';
-export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
+import { UsersTypes, MessageTypes } from '../constants'
 
 export const loginUser = function (token, user) {
   return {
-    type: LOGIN, token, user
-  }
-};
-
-export const clearMessage = function () {
-  return {
-    type: CLEAR_MESSAGE
+    type: UsersTypes.LOGIN, token, user
   }
 };
 
 export const messageSuccess = function (message) {
   return {
-    type: SUCCESS,
+    type: MessageTypes.SUCCESS,
     message
   }
 };
 
 export const messageError = function (message) {
   return {
-    type: ERROR,
+    type: MessageTypes.ERROR,
     message
   }
 };
+
+export const attemptLoginUser = function (login, password) {
+  return {
+    type: UsersTypes.ATTEMPT_LOGIN, login, password
+  }
+}
 
 export const apiLoginUser = function (login, password) {
   return dispatch => {
@@ -46,25 +41,5 @@ export const apiLoginUser = function (login, password) {
         history.push('/')
       }
     })
-  }
-};
-
-export const error = function (message) {
-  return dispatch => {
-    dispatch(messageError(message))
-
-    setTimeout(() => {
-      dispatch(clearMessage())
-    }, 4000)
-  }
-};
-
-export const success = function (message) {
-  return dispatch => {
-    dispatch(messageSuccess(message))
-
-    setTimeout(() => {
-      dispatch(clearMessage())
-    }, 4000)
   }
 };

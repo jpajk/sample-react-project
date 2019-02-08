@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import Api from '../../lib/api/Api'
 import { connect } from 'react-redux'
-import { error } from "../../actions";
+import {error, messageError} from "../../actions";
 
 const withAuth = WrappedComponent => {
   const mapDispatchToProps = dispatch => {
     return {
       flashError: message => {
-        dispatch(error(message));
+        dispatch(messageError(message));
       }
     };
   };

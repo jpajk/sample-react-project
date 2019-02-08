@@ -1,9 +1,9 @@
 
-import { error, success } from './../../actions'
+import { messageError, messageSuccess } from './../../actions'
 import store from '../../defaultStore'
 
 export const API_URL = 'http://localhost:8888/';
-window.console.log(store.getState())
+
 class Api {
   static fetch({ url='', method='get', body={} }) {
 
@@ -34,10 +34,10 @@ class Api {
           for (let el of json.messages) {
             switch(el.element) {
               case 'Flash/error':
-                store.dispatch(error(el.message));
+                store.dispatch(messageError(el.message));
                 break;
               case 'Flash/success':
-                store.dispatch(success(el.message));
+                store.dispatch(messageSuccess(el.message));
                 break;
             }
           }

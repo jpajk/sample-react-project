@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { SUCCESS, ERROR, apiLoginUser, clearMessage } from "../../actions";
-import posed, { PoseGroup } from "react-pose";
+import { MessageTypes } from "../../constants"
+import posed, { PoseGroup } from "react-pose"
 
 const AnimatedBox = posed.div({
   enter: { opacity: 1, transition: { duration: 1000 } },
@@ -22,13 +22,13 @@ class Messages extends Component {
         <PoseGroup>
           {this.props.flashMessages.map((flashMessage, i) => {
             switch(flashMessage.type) {
-              case SUCCESS:
+              case MessageTypes.SUCCESS:
                 return <AnimatedBox key={i}>
                   <Alert variant="success">
                     {flashMessage.message}
                   </Alert>
                 </AnimatedBox>;
-              case ERROR:
+              case MessageTypes.ERROR:
                 return <AnimatedBox key={i}>
                   <Alert variant="danger">
                     <Row>
@@ -64,7 +64,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     clearMessage: () => {
-      dispatch(apiLoginUser());
+      window.console.log('clear message')
     }
   };
 };
